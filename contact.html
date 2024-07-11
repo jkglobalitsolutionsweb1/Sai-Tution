@@ -90,7 +90,7 @@
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
                                     <div style="" class="dropdown-menu rounded-0 m-0">
-                                        <a href="metric.html" class="dropdown-item ">Metriculation</a>
+                                        <a href="metric.html" class="dropdown-item ">Matriculation</a>
                                         <a href="cbse.html" class="dropdown-item ">CBSE</a>
                                         <a href="spoken.html" class="dropdown-item ">Spoken English</a>
                                         <a href="hindi.html" class="dropdown-item ">Hindi</a>
@@ -174,6 +174,72 @@
             </div>
         </div>
     </div>
+
+    <!-- email js code -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("nVL-ns9kz9MFYVYun"); // Replace with your EmailJS user ID
+        })();
+        
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            sendEmail(); // Call the sendEmail function
+            sendMessage(); // Call the sendMessage function
+        });
+        
+        function sendMessage() {
+            var whatsappPhoneNumber = "+9894924809"; // Your WhatsApp phone number
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var subject = document.getElementById("subject").value;
+            var message = document.getElementById("message").value;
+        
+            var url = "https://wa.me/" + whatsappPhoneNumber + "?text=" +
+                "Name: " + name + "%0a" +
+                "Email: " + email + "%0a" +
+                "Subject: " + subject + "%0a" +
+                "Message: " + message + "%0a" +
+                "This message is sent via the contact form on our website.";
+        
+            window.open(url, '_blank').focus();
+        }
+        
+        function sendEmail() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var subject = document.getElementById("subject").value;
+            var message = document.getElementById("message").value;
+        
+            var templateParams = {
+                name: name,
+                email: email,
+                subject: subject,
+                message: message
+            };
+        
+            emailjs.send("service_dts8xgb", "template_ic0h7bf", templateParams)
+                .then(function(response) {
+                    console.log("Email sent successfully", response.status, response.text);
+                    alert("Your message has been sent successfully!");
+                    document.getElementById("contactForm").reset(); // Reset form after successful submission
+                }, function(error) {
+                    console.error("Email sending failed", error);
+                    alert("Oops! Something went wrong. Please try again later.");
+                });
+        }
+    </script>
+    
+    <!-- email js code -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS (assuming you're using Bootstrap) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
     <!-- Contact End -->
 
 
