@@ -82,7 +82,7 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav w-100 justify-content-between">
-                                <a href="index.html" class="nav-item nav-link active">Home</a>
+                                <a href="index.html" class="nav-item nav-link ">Home</a>
                                 <a href="about.html" class="nav-item nav-link">About</a>
                                 <!-- dropdown -->
                               
@@ -108,7 +108,7 @@
                                 </div>
                                 <a href="teacher.html" class="nav-item nav-link">Teachers</a>
                                 
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="contact.html" class="nav-item nav-link active">Contact</a>
                                 
                             </div>
                         </div>
@@ -169,77 +169,83 @@
                                 <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>
                             </div>
                         </form>
+                        
+                        
+                       
+                        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+                        <script>
+                            (function () {
+                                emailjs.init("nVL-ns9kz9MFYVYun"); // Replace with your EmailJS user ID
+                            })();
+                        
+                            document.getElementById("contactForm").addEventListener("submit", function(event) {
+                                event.preventDefault(); // Prevent default form submission
+                                sendEmail(); // Call the sendEmail function
+                                sendMessage(); // Call the sendMessage function
+                            });
+                        
+                            function sendEmail() {
+                                var name = document.getElementById("name").value;
+                                var email = document.getElementById("email").value;
+                                var subject = document.getElementById("subject").value;
+                                var message = document.getElementById("message").value;
+                        
+                                // Validate form fields (optional)
+                                if (name === "" || email === "" || subject === "" || message === "") {
+                                    alert("Please fill in all fields.");
+                                    return;
+                                }
+                        
+                                var templateParams = {
+                                    from_name: name,
+                                    from_email: email,
+                                    subject: subject,
+                                    message_html: message
+                                };
+                        
+                                // Send email using EmailJS
+                                emailjs.send("service_dts8xgb", "template_ic0h7bf", templateParams)
+                                    .then(function(response) {
+                                        console.log("Email sent successfully", response.status, response.text);
+                                        alert("Your email has been sent successfully!");
+                                        document.getElementById("contactForm").reset(); // Reset form after successful submission
+                                    }, function(error) {
+                                        console.error("Email sending failed", error);
+                                        alert("Oops! Something went wrong with email sending. Please try again later.");
+                                    });
+                            }
+                        
+                            function sendMessage() {
+                                var phonenumber = "+9894924809"; // Replace with your WhatsApp phone number
+                                var name = document.getElementById("name").value;
+                                var gmail = document.getElementById("email").value;
+                                var mobile_number = ""; // Mobile number field not available in form, adjust as needed
+                                var business_name = ""; // Business name field not available in form, adjust as needed
+                                var district = ""; // District field not available in form, adjust as needed
+                                var aadhar_number = ""; // Aadhar number field not available in form, adjust as needed
+                        
+                                var whatsappMessage = "Name: " + name + "%0A" +
+                                                      "Email: " + gmail + "%0A" +
+                                                      "Mobile Number: " + mobile_number + "%0A" +
+                                                      "Business Name: " + business_name + "%0A" +
+                                                      "District: " + district + "%0A" +
+                                                      "Aadhar Number: " + aadhar_number + "%0A" +
+                                                      "This message is sent via the franchise enquiry form on our website.";
+                        
+                                var url = "https://wa.me/" + phonenumber + "?text=" + encodeURIComponent(whatsappMessage);
+                        
+                                // Open WhatsApp in a new tab
+                                window.open(url, '_blank').focus();
+                            }
+                        </script>
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- email js code -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        (function () {
-            emailjs.init("nVL-ns9kz9MFYVYun"); // Replace with your EmailJS user ID
-        })();
-        
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-            
-            sendEmail(); // Call the sendEmail function
-            sendMessage(); // Call the sendMessage function
-        });
-        
-        function sendMessage() {
-            var whatsappPhoneNumber = "+9894924809"; // Your WhatsApp phone number
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var subject = document.getElementById("subject").value;
-            var message = document.getElementById("message").value;
-        
-            var url = "https://wa.me/" + whatsappPhoneNumber + "?text=" +
-                "Name: " + name + "%0a" +
-                "Email: " + email + "%0a" +
-                "Subject: " + subject + "%0a" +
-                "Message: " + message + "%0a" +
-                "This message is sent via the contact form on our website.";
-        
-            window.open(url, '_blank').focus();
-        }
-        
-        function sendEmail() {
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var subject = document.getElementById("subject").value;
-            var message = document.getElementById("message").value;
-        
-            var templateParams = {
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            };
-        
-            emailjs.send("service_dts8xgb", "template_ic0h7bf", templateParams)
-                .then(function(response) {
-                    console.log("Email sent successfully", response.status, response.text);
-                    alert("Your message has been sent successfully!");
-                    document.getElementById("contactForm").reset(); // Reset form after successful submission
-                }, function(error) {
-                    console.error("Email sending failed", error);
-                    alert("Oops! Something went wrong. Please try again later.");
-                });
-        }
-    </script>
-    
-    <!-- email js code -->
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Bootstrap JS (assuming you're using Bootstrap) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-
     <!-- Contact End -->
 
 
