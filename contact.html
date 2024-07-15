@@ -187,7 +187,7 @@
                             function sendEmail() {
                                 var name = document.getElementById("name").value;
                                 var email = document.getElementById("email").value;
-                                var subject = document.getElementById("subject").value;
+                                var subject = document.getElementById("subject").value; // Ensure subject is captured correctly
                                 var message = document.getElementById("message").value;
                         
                                 // Validate form fields (optional)
@@ -197,10 +197,10 @@
                                 }
                         
                                 var templateParams = {
-                                    from_name: name,
-                                    from_email: email,
-                                    subject: subject,
-                                    message_html: message
+                                    name: name,
+                                    email: email,
+                                    subject: subject, // Ensure subject field is correctly included
+                                    message: message
                                 };
                         
                                 // Send email using EmailJS
@@ -218,19 +218,12 @@
                             function sendMessage() {
                                 var phonenumber = "+9894924809"; // Replace with your WhatsApp phone number
                                 var name = document.getElementById("name").value;
-                                var gmail = document.getElementById("email").value;
-                                var mobile_number = ""; // Mobile number field not available in form, adjust as needed
-                                var business_name = ""; // Business name field not available in form, adjust as needed
-                                var district = ""; // District field not available in form, adjust as needed
-                                var aadhar_number = ""; // Aadhar number field not available in form, adjust as needed
+                                var email = document.getElementById("email").value;
                         
+                                // Since other fields are not available in the form, adjust the message accordingly
                                 var whatsappMessage = "Name: " + name + "%0A" +
-                                                      "Email: " + gmail + "%0A" +
-                                                      "Mobile Number: " + mobile_number + "%0A" +
-                                                      "Business Name: " + business_name + "%0A" +
-                                                      "District: " + district + "%0A" +
-                                                      "Aadhar Number: " + aadhar_number + "%0A" +
-                                                      "This message is sent via the franchise enquiry form on our website.";
+                                                      "Email: " + email + "%0A" +
+                                                      "This message is sent via the contact form on our website.";
                         
                                 var url = "https://wa.me/" + phonenumber + "?text=" + encodeURIComponent(whatsappMessage);
                         
@@ -238,6 +231,7 @@
                                 window.open(url, '_blank').focus();
                             }
                         </script>
+                        
                         
                         
                         
