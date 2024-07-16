@@ -1,0 +1,6 @@
+.brightness-hover {
+    transition: filter 0.3s ease;
+  }
+  .brightness-hover:hover {
+    filter: brightness(70%); /* Adjust brightness level (0 to 100%) */
+  }
