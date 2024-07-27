@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Image Upload, Display, Edit, and Delete</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Firebase Configuration -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js";
+    import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWCjdQa-4HopLTDssnNnam18oOvP3FRYs",
+      authDomain: "test-55b3e.firebaseapp.com",
+      projectId: "test-55b3e",
+      storageBucket: "test-55b3e.appspot.com",
+      messagingSenderId: "784592619877",
+      appId: "1:784592619877:web:331ccf96b3c37694a6f98c"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const storage = getStorage(app);
+    const firestore = getFirestore(app);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const file = document.getElementById('fileInput').files[0];
+        const hotelName = document.getElementById('hotelName').value;
+
+        if (!file) {
+          alert("Please choose a file to upload first.");
+          return;
+        }
+
+        try {
+          const storageRef = ref(storage, 'images/' + file.name);
+          const uploadTask = uploadBytesResumable(storageRef, file);
+
+          uploadTask.on('state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              document.getElementById('progress').textContent = 'Upload is ' + progress + '% done';
+            },
+            (error) => {
+              console.error('Upload failed:', error);
+            },
+            async () => {
+              const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+              await addDoc(collection(firestore, 'hotels'), {
+                hotelName,
+                imageUrl: downloadURL,
+                imageName: file.name
+              });
+
+              document.getElementById('downloadURL').innerHTML = `<a href="${downloadURL}" target="_blank">Download URL</a>`;
+              loadImages();
+            }
+          );
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      });
+
+      const loadImages = async () => {
+        const imageTable = document.getElementById('imageTableBody');
+        imageTable.innerHTML = '';
+
+        try {
+          const querySnapshot = await getDocs(collection(firestore, 'hotels'));
+          querySnapshot.forEach((doc) => {
+            const hotel = doc.data();
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><img src="${hotel.imageUrl}" class="img-fluid" width="100" /></td>
+              
+              <td>${hotel.hotelName}</td>
+              <td><button class="btn btn-primary btn-sm" onclick="editImage('${hotel.imageName}', '${hotel.imageUrl}', '${doc.id}', '${hotel.hotelName}')">Edit</button></td>
+              <td><button class="btn btn-danger btn-sm" onclick="deleteImage('${hotel.imageName}', '${doc.id}')">Delete</button></td>`;
+            imageTable.appendChild(row);
+          });
+        } catch (error) {
+          console.error('Error loading images:', error);
+        }
+      };
+
+      window.editImage = (imageName, url, docId, hotelName) => {
+        document.getElementById('editSection').innerHTML = `
+          <h2>Edit Hotel Data</h2>
+          <img src="${url}" class="img-fluid" width="100" />
+          <form id="editForm">
+            <div class="form-group">
+              <label for="editHotelName">Hotel Name</label>
+              <input type="text" id="editHotelName" value="${hotelName}" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="editFileInput">Change Image (Optional)</label>
+              <input type="file" id="editFileInput" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Update Data</button>
+            <div id="editProgress"></div>
+          </form>
+        `;
+
+        document.getElementById('editForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const newHotelName = document.getElementById('editHotelName').value;
+          const newFile = document.getElementById('editFileInput').files[0];
+
+          try {
+            const docRef = doc(firestore, 'hotels', docId);
+            const updateData = {
+              hotelName: newHotelName
+            };
+
+            if (newFile) {
+              const storageRef = ref(storage, 'images/' + newFile.name);
+              const uploadTask = uploadBytesResumable(storageRef, newFile);
+
+              uploadTask.on('state_changed',
+                (snapshot) => {
+                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  document.getElementById('editProgress').textContent = 'Upload is ' + progress + '% done';
+                },
+                (error) => {
+                  console.error('Upload failed:', error);
+                },
+                async () => {
+                  const newImageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+                  updateData.imageUrl = newImageUrl;
+                  updateData.imageName = newFile.name;
+
+                  await updateDoc(docRef, updateData);
+                  await deleteObject(ref(storage, 'images/' + imageName)); // Delete old image
+
+                  document.getElementById('editSection').innerHTML = '';
+                  loadImages();
+                }
+              );
+            } else {
+              await updateDoc(docRef, updateData);
+              document.getElementById('editSection').innerHTML = '';
+              loadImages();
+            }
+          } catch (error) {
+            console.error('Error updating document:', error);
+          }
+        });
+      };
+
+      window.deleteImage = async (imageName, docId) => {
+  if (confirm("Are you sure you want to delete this image?")) {
+    try {
+      const storageRef = ref(storage, 'images/' + imageName);
+      await deleteObject(storageRef);
+
+      await deleteDoc(doc(firestore, 'hotels', docId)); // Delete document from Firestore
+
+      alert("Image and hotel data deleted successfully.");
+      loadImages(); // Refresh the image list
+    } catch (error) {
+      console.error('Error deleting image:', error);
+    }
+  }
+};
+
+
+      loadImages();
+    });
+  </script>
+  
+</head>
+<body>
+  <style>
+    /* Custom styles for the admin panel */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding-top: 70px; /* Adjust based on your header height */
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000; /* Ensure header stays above content */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      margin: 0;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 28px;
+    }
+    .container {
+      width: 80%;
+      margin: 90px auto 20px; /* Adjust top margin to make space for fixed header */
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+    .table {
+      margin-top: 20px;
+    }
+  </style>
+    <header>
+    
+      <h1 style="font-variant: small-caps;"> Admin Panel of Sai Tution Center</h1>
+    </header>
+  <br><br><br>
+    <div class="container">
+      <h2>Sai Tuition Gallery Image Upload</h2>
+      <form id="uploadForm">
+        <div class="form-group">
+          <label for="fileInput">Gallery Images</label>
+          <input type="file" id="fileInput" class="form-control-file" required />
+        </div>
+        <div class="form-group">
+          <label for="hotelName">Image Name</label>
+          <input type="text" id="hotelName" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Data</button>
+      </form>
+  
+      <div id="progress" class="mt-3"></div>
+      <div id="downloadURL" class="mt-3"></div>
+  
+      <h3 class="mt-4">Uploaded Gallery Images</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Image Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="imageTableBody">
+            <!-- Uploaded hotels will be displayed here -->
+          </tbody>
+        </table>
+      </div>
+  
+      <div id="editSection" class="mt-4"></div>
+    </div>
+    <br><br><br><br><br>
+  
+    <footer>
+      <p>&copy; 2024 Sai Tution Center. All rights reserved.</p>
+    </footer>
+  
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
