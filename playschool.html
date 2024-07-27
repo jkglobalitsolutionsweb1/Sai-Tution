@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Sai Tution Centre</title>
+    <title>Sai Tuition Centre</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -18,6 +18,9 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
@@ -25,6 +28,56 @@
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="gallery.css">
 </head>
+<style>
+    /* Basic reset for margin and padding */
+body, h1, img {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the gallery container */
+.gallery {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.gallery h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* Ensuring each row contains exactly 3 images on larger screens */
+@media (min-width: 992px) { /* For laptops and desktops */
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.gallery-grid img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive design for mobile screens */
+@media (max-width: 991px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+</style>
 
 <body>
     <!-- Topbar Start -->
@@ -68,9 +121,9 @@
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
 
-
+    <!-- ... Your topbar content ... -->
+    
     <!-- Navbar Start -->
     <div style="text-align: center;" class="container-fluid ">
         <div class="row border-top  ">
@@ -92,10 +145,10 @@
                               
                                 <!-- dropdown -->
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle  active" data-toggle="dropdown">Classes</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
                                     <div style="" class="dropdown-menu rounded-0 m-0">
                                         <a href="metric.html" class="dropdown-item ">Matriculation</a>
-                                        <a href="SVS Play School.html" class="dropdown-item ">SVS Play School</a>
+                                        <a href="cbse.html" class="dropdown-item ">CBSE</a>
                                         <a href="spoken.html" class="dropdown-item ">Spoken English</a>
                                         <a href="hindi.html" class="dropdown-item ">Hindi</a>
                                         <a href="abacus.html" class="dropdown-item ">Abacus</a>
@@ -110,12 +163,14 @@
                                         
                                     </div>
                                 </div>
-                                <a href="playschool.html" class="nav-item nav-link">Play School</a>
+                                <a href="playschool.html" class="nav-item nav-link active">Play School</a>
+                              
                                 <a href="teacher.html" class="nav-item nav-link">Teachers</a>
                                 
                                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                                 <a href="gallery.html" class="nav-item nav-link">Gallery</a>
                                 <a target="_blank" href="firestore database image text CRUD/firebase firestore database image and data crud .html" class="nav-item nav-link">Admin</a>
+                               
                                 
                             </div>
                         </div>
@@ -124,89 +179,46 @@
             </div>
         </div>
     </div>
-    
-    <!-- Navbar End -->
-
-
-
-    
+    <!-- ... Your navbar content ... -->
 
     <!-- Header Start -->
-    <div class="container-fluid page-header" style="margin-bottom: 90px;">
-        <div class="container">
-            <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-                <h3 class="display-4 text-white text-uppercase">SVS Play School</h3>
-                <div class="d-inline-flex text-white">
-                    <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
-                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                    <p class="m-0 text-uppercase">SVS Play School</p>
-                </div>
-            </div>
+    <!-- ... Your header content ... -->
+
+    <!-- Gallery Start -->
+    <div class="gallery p-5">
+        <h1>Image Gallery</h1>
+        <div class="gallery-grid">
+            <!-- Add your images here -->
+            <img src="./img/gel1.jpg" alt="Gel 1" class="img-fluid">
+            <img src="./img/gel2.jpg" alt="Gel 2" class="img-fluid">
+            <img src="./img/gel3.jpg" alt="Gel 3" class="img-fluid">
+            <img src="./img/gel4.jpg" alt="Gel 4" class="img-fluid">
+            <img src="./img/gel5.jpg" alt="Gel 5" class="img-fluid">
+            <img src="./img/gel6.jpg" alt="Gel 6" class="img-fluid">
+            <img src="./img/Acheive2.jpg" alt="Acheive 2" class="img-fluid">
+            <img src="./img/achieve1.jpg" alt="Achieve 1" class="img-fluid">
+
+            <img src="./img/gel8.jpg" alt="Gel 8" class="img-fluid">
+            <img src="./img/gel9.jpg" alt="Gel 9" class="img-fluid">
+            <img src="./img/gel10.jpg" alt="Gel 10" class="img-fluid">
+            <img src="./img/gel13.jpg" alt="Gel 13" class="img-fluid">
+            <img src="./img/gel14.jpg" alt="Gel 14" class="img-fluid">
+            <img src="./img/gel15.jpg" alt="Gel 15" class="img-fluid">
+            <img src="./img/gel16.jpg" alt="Gel 16" class="img-fluid">
+            <img src="./img/gel17.jpg" alt="Gel 17" class="img-fluid">
+            <img src="./img/gel18.jpg" alt="Gel 18" class="img-fluid">
+            <img src="./img/gel19.jpg" alt="Gel 19" class="img-fluid">
+            <img src="./img/gel20.jpg" alt="Gel 20" class="img-fluid">
+            <img src="./img/gel25.jpg" alt="Gel 25" class="img-fluid">
+            <img src="./img/gel7.jpg" alt="Gel 7" class="img-fluid">
+            <!-- <img src="./img/gel11.jpg" alt="Gel 11" class="img-fluid">
+            <img src="./img/gel12.jpg" alt="Gel 12" class="img-fluid">
+            <img src="./img/gel22.jpg" alt="Gel 22" class="img-fluid">
+            <img src="./img/gel23.jpg" alt="Gel 23" class="img-fluid">
+            <img style="height: 500px;" src="./img/gel24.jpg" alt="Gel 24" class="img-fluid"> -->
         </div>
     </div>
-    <!-- Header End -->
-
-
-    <!-- Team Start -->
-
-  <div class="metric container-fluid p-2">
-    <div class="text-center mb-5">
-        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">SVS Play School</h5>
-        <h1>SVS Play School</h1>
-    </div>
-    <div class="">
-        <div  class=" text-center team mb-4">
-            <div class="team-item rounded overflow-hidden mb-2">
-                <div class="team-img position-relative">
-                  
-                    <div class="container gallery">
-                        <img class="img-fluid brightness-hover" style="" src="./img/playschool 2.jpg" alt="">
-                      </div>
-                       
-                      
-                </div>
-                      
-                </div>
-               
-                    <!-- <div class="team-social align-items-center justify-content-center"> -->
-                        <!-- <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                         -->
-<!--                         
-                        <h1 style="color: white;">First Standard to Twelth Standard</h1> -->
-                        <br>
-                        <!-- <a  class="btn btn-outline-light btn-square mx-1" href="#"><i  class="fas fa-user-graduate"></i></a>  -->
-                    <!-- </div> -->
-                </div>
-                <!-- <div class="bg-secondary p-4">
-                    
-                    <p class="m-2">Sai Tuition Centre is your premier destination for SVS Play School curriculum coaching, dedicated to nurturing academic excellence and holistic development from 1st to 12th standard. Located conveniently in [Location], we pride ourselves on offering a supportive learning environment designed to unlock every student's full potential.
-
-                        At Sai Tuition Centre, we understand the importance of a strong foundation in the SVS Play School curriculum. Our experienced and SVS Play School-certified faculty are committed to providing comprehensive subject knowledge and personalized attention to ensure each student achieves academic success.
-                        
-                        We offer a structured curriculum that covers all subjects in-depth, preparing students thoroughly for SVS Play School examinations.</p>
-                </div> -->
-            </div>
-        </div>
-       
-</div>
-  </div>
-
-  <div class="container-fluid">
-        <h1 class="text-center">Our Students Achievements</h1>
-       <div class="container text-center">
-        <img class="img-fluid brightness-hover" src="./img/achieve1.jpg" alt="">
-        <br> <br>
-        <img class="img-fluid brightness-hover" src="./img/Acheive2.jpg" alt="">
-       </div>
-  </div>
-
-
-
-
-
-    <!-- Team End -->
-
+    <!-- Gallery End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
@@ -230,7 +242,7 @@
                         <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Our Courses</h5>
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-white mb-2" href="metric.html"><i class="fa fa-angle-right mr-2"></i>Matriculation</a>
-                            <a class="text-white mb-2" href="SVS Play School.html"><i class="fa fa-angle-right mr-2"></i>SVS Play School</a>
+                            <a class="text-white mb-2" href="cbse.html"><i class="fa fa-angle-right mr-2"></i>CBSE</a>
                             <a class="text-white mb-2" href="spoken.html"><i class="fa fa-angle-right mr-2"></i>Spoken English</a>
                             <a class="text-white mb-2" href="hindi.html"><i class="fa fa-angle-right mr-2"></i>Hindi</a>
                             <a class="text-white" href="abacus.html"><i class="fa fa-angle-right mr-2"></i>Abacus</a>
@@ -279,9 +291,11 @@
     <!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+  
+    <!-- ... Your footer content ... -->
 
+    <!-- Back to Top -->
+    <!-- ... Your back to top button ... -->
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
