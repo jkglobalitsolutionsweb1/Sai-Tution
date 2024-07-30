@@ -131,10 +131,10 @@ body, h1, img {
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <div class="container-fluid">
-                        <a href="#" class="navbar-brand text-decoration-none d-block d-lg-none">
+                        <a href="" class="navbar-brand text-decoration-none d-block d-lg-none">
                             <img height="50px" src="./img/pdf_page-0001-removebg-preview.png" alt="">
                         </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
@@ -145,7 +145,7 @@ body, h1, img {
                               
                                 <!-- dropdown -->
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
+                                    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
                                     <div style="" class="dropdown-menu rounded-0 m-0">
                                         <a href="metric.html" class="dropdown-item ">Matriculation</a>
                                         <a href="cbse.html" class="dropdown-item ">CBSE</a>
@@ -155,7 +155,7 @@ body, h1, img {
                                     </div>
                                 </div>
                                 <div  class="nav-item dropdown">
-                                    <a  href="#" class="nav-link dropdown-toggle  extra" data-toggle="dropdown">Extracurricular Activities</a>
+                                    <a  href="" class="nav-link dropdown-toggle  extra" data-toggle="dropdown">Extracurricular Activities</a>
                                     <div class="dropdown-menu rounded-0 m-0">
                                         <a href="yoga.html" class="dropdown-item">Yoga</a>
                                         <a href="karate.html" class="dropdown-item">Karate</a>
@@ -169,7 +169,7 @@ body, h1, img {
                                 
                                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                                 <a href="gallery.html" class="nav-item nav-link">Gallery</a>
-                                <a target="_blank" href="firestore database image text CRUD/firebase firestore database image and data crud .html" class="nav-item nav-link">Admin</a>
+                                <a target="_blank" href="login.html" class="nav-item nav-link">Admin</a>
                                
                                 
                             </div>
@@ -185,7 +185,41 @@ body, h1, img {
     <!-- ... Your header content ... -->
 
     <!-- Gallery Start -->
-    <div class="gallery p-5">
+    <style>
+        .gallery-grid img {
+            max-width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            .gallery-grid img[alt="Gel 8"] {
+                height: auto !important;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .gallery-grid img[alt="Gel 8"] {
+                height: 135px !important;
+            }
+        }
+    </style>
+    <div class="container">
+        <p> <h1>SVS Play School:</h1> Where Learning Meets Fun</p>
+<h4>Welcome to SVS Play School!</h4>
+<p>At SVS Play School, we believe that early childhood is a magical time of exploration and growth. Our mission is to nurture young minds and help them flourish in a safe, engaging, and stimulating environment. We are dedicated to providing a holistic education that balances academic learning with extracurricular activities, ensuring that each child develops a well-rounded personality.</p>
+<h3> Our Philosophy</h3>
+<p>SVS Play School is built on the foundation of love, care, and respect for each child. We understand that every child is unique and we strive to cater to their individual needs and interests. Our curriculum is designed to foster curiosity, creativity, and a love for learning, preparing children for the next stages of their educational journey.</p>
+<h3>Extracurricular Activities</h3>
+<p>To complement our academic programs, we offer a variety of extracurricular activities that encourage physical fitness, cultural awareness, and environmental stewardship. Here are some of the exciting activities we offer:</p>
+<p><h4>1. Karate</h4>- Discipline and Focus: Karate teaches children discipline, focus, and self-control. It's an excellent way for them to channel their energy positively.<br />- Physical Fitness: Karate sessions help improve strength, flexibility, and coordination.</p>
+<p><h4>2. Silambam</h4> <h5>Cultural Heritage:</h5> Silambam is an ancient martial art from Tamil Nadu, promoting cultural heritage and pride.<br /> <h5 class="my-2
+    ">Skill Development:</h5> This activity enhances agility, balance, and reflexes through rhythmic movements and techniques.</p>
+<p><h4>3. Planting Trees</h4>- Environmental Awareness: We believe in nurturing a love for nature. Our tree planting activities teach children the importance of caring for the environment.<br />- Hands-On Learning: Kids get hands-on experience in planting and tending to trees, learning about growth and sustainability.</p>
+<h4>Why Choose SVS Play School?</h4>
+<p><h5> Experienced Educators:</h5> Our team of experienced and passionate teachers are dedicated to creating a nurturing and inspiring learning environment.<br />- Safe and Secure: We prioritize the safety and well-being of our students with secure facilities and vigilant staff.<br />- Holistic Development: Our balanced approach ensures that children grow academically, physically, and socially.</p>
+<p> Join Us!</p>
+<p>At SVS Play School, we are committed to laying the foundation for a lifetime of learning and happiness. Come join our family and watch your child thrive!</p>
+
+    </div>
+      <div class="gallery p-5 container">
         <h1>Image Gallery</h1>
         <div class="gallery-grid">
             <!-- Add your images here -->
@@ -197,8 +231,7 @@ body, h1, img {
             <img src="./img/gel6.jpg" alt="Gel 6" class="img-fluid">
             <img src="./img/Acheive2.jpg" alt="Acheive 2" class="img-fluid">
             <img src="./img/achieve1.jpg" alt="Achieve 1" class="img-fluid">
-
-            <img src="./img/gel8.jpg" alt="Gel 8" class="img-fluid">
+            <img style="height: 230px;" src="./img/gel8.jpg" alt="Gel 8" class="img-fluid">
             <img src="./img/gel9.jpg" alt="Gel 9" class="img-fluid">
             <img src="./img/gel10.jpg" alt="Gel 10" class="img-fluid">
             <img src="./img/gel13.jpg" alt="Gel 13" class="img-fluid">
@@ -211,11 +244,6 @@ body, h1, img {
             <img src="./img/gel20.jpg" alt="Gel 20" class="img-fluid">
             <img src="./img/gel25.jpg" alt="Gel 25" class="img-fluid">
             <img src="./img/gel7.jpg" alt="Gel 7" class="img-fluid">
-            <!-- <img src="./img/gel11.jpg" alt="Gel 11" class="img-fluid">
-            <img src="./img/gel12.jpg" alt="Gel 12" class="img-fluid">
-            <img src="./img/gel22.jpg" alt="Gel 22" class="img-fluid">
-            <img src="./img/gel23.jpg" alt="Gel 23" class="img-fluid">
-            <img style="height: 500px;" src="./img/gel24.jpg" alt="Gel 24" class="img-fluid"> -->
         </div>
     </div>
     <!-- Gallery End -->
@@ -232,10 +260,10 @@ body, h1, img {
                         <p><i class="fa fa-phone-alt mr-2"></i>8870049639,8778548943</p>
                         <p><i class="fa fa-envelope mr-2"></i>aravindcompu@gmail.com </p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-outline-light btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mr-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square" href=""><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6 mb-5">
@@ -273,16 +301,16 @@ body, h1, img {
             <div class="col-lg-6 text-center text-md-right">
                 <ul class="nav d-inline-flex">
                     <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Privacy</a>
+                        <a class="nav-link text-white py-0" href="">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Terms</a>
+                        <a class="nav-link text-white py-0" href="">Terms</a>
                     </li>   
                     <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">FAQs</a>
+                        <a class="nav-link text-white py-0" href="">FAQs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Help</a>
+                        <a class="nav-link text-white py-0" href="">Help</a>
                     </li>
                 </ul>
             </div>
